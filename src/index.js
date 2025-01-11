@@ -12,10 +12,10 @@ const cookieParser = require('cookie-parser');
 
 const config = {
     port : '4040',
-    hostname : 'localhost'
+    // hostname : 'localhost'
 }
 
-server.listen(config.port, config.hostname, function(){
+server.listen(config.port, function(){
     console.log(`server starts at ; http://${config.hostname}:${config.port}`);
     
 })
