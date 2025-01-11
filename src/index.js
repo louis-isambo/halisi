@@ -15,10 +15,7 @@ const config = {
 
 }
 
-server.listen(config.port, function(){
-    console.log(`server started`);
-    
-})
+
 
 
 // app.use(cors({
@@ -126,4 +123,10 @@ app.get("/clearData", function(req, res){
     }
     
     res.redirect("/login")
+})
+
+
+server.listen(4040, function(){
+    console.log(`server started`);
+    
 })
