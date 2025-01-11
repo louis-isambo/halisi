@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/leistrap.js"></script>
+    <script src="/js/qrgenerator.js"></script>
+    <script src="/js/qfetching.js"></script>
+    <link rel="stylesheet" href="/css/leistrap.css">
+    <title>Ajouter un invité</title>
+
+    <style>
+        .cardADD{
+            padding: 20px;
+            gap:.5rem;
+            width: 400px;
+            min-height:  200px;
+            outline: none;
+            border: 1ps solid #aaa;
+            border-radius: 8px;
+            margin: 25vh auto;
+            background-color: #fff;
+        }
+        #name, #link{
+            padding:  5px 7px;
+            border: 1px solid #aaa;
+        }
+
+        .inputs{
+            gap: .8rem;
+        }
+
+        #msgError{
+            padding: 10px 14px ;
+            width: 100%;
+            background-color: #fa919b77;
+            border: 1.5px solid #ff485ab2;
+            outline: none;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    
+
+
+    <div class="leis-flex cardADD">
+        <h2>Ajouter un invité </h2>
+       <div class="leis-flex inputs">
+        <div>
+            <label for="name"> Nom </label>
+            <input  class="leis-textinput" id="name" placeholder="Nom de l'invité" type="text">
+        </div>
+
+       <div hidden id="lp">
+        <label for="link"> Lien</label>
+        <input  class="leis-textinput" id="link" placeholder="partager" type="text">
+       </div>
+       <p id="msgError" hidden></p>
+       </div>
+       <div class="leis-flex">
+            <button type="button" class="leis-btn leis-btn-success" id="c"> Ajouter </button>
+       </div>
+    </div>
+
+    <script>
+        
+        const url = location.pathname.split("/")
+        
+        document.getElementById("c").addEventListener("click", function(){
+            const linkShare = document.getElementById("link")
+            linkShare.value = ""
+            document.getElementById("lp").setAttribute("hidden", "true")
+            document.getElementById("msgError").setAttribute("hidden", "true")
+
+            const GustName = document.getElementById("name").value
+            const path = location.protocol + location.host
+            
+            leistrap.event.invoke("event:addgust", null, {key: url[url.length - 1], name : GustName }, function(res){
+                        document.getElementById("lp").removeAttribute("hidden")
+                        linkShare.value = path+"/iv/"+res.data.key
+
+                })
+           
+        })
+
+    </script>
+</body>
+</html>

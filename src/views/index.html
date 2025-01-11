@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire d'evenement</title>
+    <script src="/js/leistrap.js"></script>
+    <script src="/js/qrgenerator.js"></script>
+    <script src="/js/qfetching.js"></script>
+   <link rel="stylesheet" href="/css/index.css">
+   <style>
+      #msgError{
+            padding: 10px 14px ;
+            width: 100%;
+            background-color: #fa919b77;
+            border: 1.5px solid #ff485ab2;
+            outline: none;
+            border-radius: 8px;
+        }
+   </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Créer un Evénement</h2>
+        <form id="eventForm">
+            <div class="form-group">
+                <label for="organizer">Organisateur</label>
+                <input type="text" id="organizer" name="organizer" required>
+            </div>
+
+            <div class="form-group">
+                <label for="title">Titre</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+
+            <div class="form-group">
+                <label for="startTime">Date et Heure de début</label>
+                <input type="datetime-local" id="startTime" name="startTime" required>
+            </div>
+
+            <div class="form-group">
+                <label for="endTime">Heure de Fin</label>
+                <input type="datetime-local" id="endTime" name="endTime" required>
+            </div>
+
+            <div class="form-group">
+                <label for="place">Lieu</label>
+                <input type="text" id="place" name="place" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Téléphone</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" rows="4"></textarea>
+            </div>
+            <p id="msgError" hidden></p>
+            <button type="submit">Créer l'Événement</button>
+        </form>
+        <a href="#" id="iv" hidden></a>
+    </div>
+    
+        </form>
+    </div>
+
+    <script src="/js/index.js"></script>
+</body>
+</html>

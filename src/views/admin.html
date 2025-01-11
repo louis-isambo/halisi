@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/leistrap.js"></script>
+    <script src="/js/qrgenerator.js"></script>
+    <script src="/js/qfetching.js"></script>
+    <title>Administration</title>
+    <link rel="stylesheet" href="/css/Admin.css">
+</head>
+<body>
+    <header>
+    <h1>Halisi - Admin</h1>
+  </header>
+
+  <div class="container">
+    <a href="formulaire.html" class="button">Ajouter un événement</a>
+
+    <table class="events-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nom de l'événement</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="events-list">
+        <!-- Les événements seront insérés ici -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modale pour afficher les invités -->
+  <div class="modal" id="guest-modal">
+    <div class="modal-content">
+      <div class="modal-header">Invités de l'événement</div>
+      <div class="search-bar">
+        <input type="text" id="search-box" placeholder="Rechercher un invité..." oninput="filterGuests()">
+      </div>
+      <div class="modal-body">
+        <ul id="guest-list">
+          <!-- Liste des invités -->
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button class="close" onclick="closeModal()">Fermer</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/Admin.js"></script>
+
+</body>
+</html>

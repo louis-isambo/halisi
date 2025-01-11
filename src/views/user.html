@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>utilisateur</title>
+    <link rel="stylesheet" href="http://localhost:4040/css/boostrap.css">
+</head>
+<body>
+  <header>
+    <span class="profile-icon">🙂</span>
+    <h1>Nom d'utilisateur</h1>
+  </header>
+  
+  <div class="nav-tabs">
+    <button class="tab-btn active">Paramètres</button>
+    <button class="tab-btn">Créer invitation</button>
+    <button class="tab-btn">Scanner invitation</button>
+    <button class="tab-btn">Partager les liens</button>
+  </div>
+  
+  <div class="tab-content">
+    <div class="active">
+      <h2>Paramètres</h2>
+      <div class="form-group">
+        <label for="nom">Nom</label>
+        <input type="text" id="nom" value="Nom d'utilisateur">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" value="email@example.com">
+      </div>
+      <div class="form-group">
+        <label for="telephone">Téléphone</label>
+        <input type="tel" id="telephone" value="0123456789">
+      </div>
+      <div class="form-group">
+        <label for="adresse">Adresse</label>
+        <input type="text" id="adresse" value="123 Rue Exemple, Ville">
+      </div>
+      <div class="form-group">
+        <label for="bio">Bio</label>
+        <textarea id="bio">Votre biographie ici...</textarea>
+      </div>
+      <button type="submit">Enregistrer les modifications</button>
+    </div>
+    <div>
+      <h2>Créer invitation</h2>
+      <form>
+        <div class="form-group">
+          <label for="type-evenement">Type d'événement</label>
+          <select id="type-evenement">
+            <option value="anniversaire">Anniversaire</option>
+            <option value="mariage">Mariage</option>
+            <option value="soiree">Soirée</option>
+            <option value="autre">Autre</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="date-evenement">Date de l'événement</label>
+          <input type="date" id="date-evenement">
+        </div>
+        <div class="form-group">
+          <label for="heure-evenement">Heure de l'événement</label>
+          <input type="time" id="heure-evenement">
+        </div>
+        <div class="form-group">
+          <label for="nb-invites">Nombre d'invités (approximation)</label>
+          <input type="number" id="nb-invites" min="0" value="0">
+        </div>
+        <div class="form-group">
+          <label for="modele-invitation">Modèle d'invitation</label>
+          <select id="modele-invitation">
+            <option value="modele1">Modèle 1</option>
+            <option value="modele2">Modèle 2</option>
+            <option value="modele3">Modèle 3</option>
+          </select>
+        </div>
+        <button type="submit">Créer l'invitation</button>
+      </form>
+    </div>
+    <div>
+      <h2>Scanner invitation</h2>
+      <div id="qr-scanner">
+        <video id="video" autoplay></video>
+        <button id="start-scan">Démarrer le scan</button>
+        <div id="qr-result">Résultat du scan : <span id="result-text"></span></div>
+      </div>
+    </div>
+    <div>
+      <h2>Partager les liens</h2>
+      <div class="form-group">
+        <label for="team-link">Envoyer le lien à votre équipe :</label>
+        <input type="text" id="team-link" placeholder="Entrez l'email de votre équipe">
+        <button onclick="sendTeamLink()">Envoyer</button>
+      </div>
+      <div class="form-group">
+        <label>Partager le lien du site :</label>
+        <div class="social-share">
+          <button onclick="shareOnSocial('facebook')">Facebook</button>
+          <button onclick="shareOnSocial('twitter')">Twitter</button>
+          <button onclick="shareOnSocial('whatsapp')">WhatsApp</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/@zxing/library@latest"></script>
+  <script>
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content > div');
+
+    // Initialize the first tab as active
+    tabButtons.forEach((btn, index) => {
+      btn.addEventListener('click', () => {
+        tabButtons.forEach(b => b.classList.remove('active'));
+        tabContents.forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        tabContents[index].classList.add('active');
+      });
+    });
+
+    // Show the initial active tab
+    tabContents[0].classList.add('active');
+
+    const video = document.getElementById('video');
+    const resultText = document.getElementById('result-text');
+
+    document.getElementById('start-scan').addEventListener('click', async () => {
+      const codeReader = new ZXing.BrowserQRCodeReader();
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+
+      video.srcObject = stream;
+
+      codeReader.decodeFromVideoDevice(null, video, (result, err) => {
+        if (result) {
+          resultText.textContent = result.text;
+          video.srcObject.getTracks().forEach(track => track.stop());
+        }
+        if (err && !(err instanceof ZXing.NotFoundException)) {
+          console.error(err);
+        }
+      });
+    });
+
+    function sendTeamLink() {
+      const link = document.getElementById('team-link').value;
+      alert(`Lien envoyé à ${link}`);
+      // Implémentez ici la logique d'envoi par email ou autre méthode
+    }
+
+    function shareOnSocial(platform) {
+      const url = window.location.href; // Lien du site
+      let shareUrl;
+
+      switch (platform) {
+        case 'facebook':
+          shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+          break;
+        case 'twitter':
+          shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}`;
+          break;
+        case 'whatsapp':
+          shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(url)}`;
+          break;
+      }
+
+      window.open(shareUrl, '_blank');
+    }
+  </script>
+
+
+  </body>
+  
+</html>

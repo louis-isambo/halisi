@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+      <link rel="stylesheet" href="/css/bs.css ">
+     <title> signup</title>
+  </head>
+<body>
+    <div class="container cont">
+      <div class="row justify-content-center">
+        <div class="col-lg-4 col-md-5 col-sm-6 col-xs-7 mb-5">
+          <div class="card rounded">
+            <ul class="nav nav-tabs justify-content-center bg-light" style="padding: 20px">
+              <li class="nav-item">
+                <h3>creation du compte</h3>
+              </li>
+            </ul>
+
+    <div class="tab-content">
+
+        <div class="tab-pane container active" id="hospitals">
+
+            <form>
+              <input type="text" name="hname" placeholder="Nom" class="form-control mb-3" required>
+              <input type="text" name="hcity" placeholder="adresse" class="form-control mb-3" required>
+              <input type="tel" name="hphone" placeholder="Numéro de téléphone " class="form-control mb-3" required pattern="[0,6-9]{1}[0-9]{9,11}" title="Password must have start from 0,6,7,8 or 9 and must have 10 to 12 digit">
+              <input type="email" name="hemail" placeholder="E-mail " class="form-control mb-3" required>
+              <input type="password" name="hpassword" placeholder="Mot de passe " class="form-control mb-3" required minlength="6">
+              <input type="submit" name="hregister" value="ALLER" class="btn btn-primary btn-block mb-4">
+            </form>
+        </div>
+       
+    <a href="login.html" class="text-center mb-4" title="Click here">Vous avez déjà un compte ?</a>
+</div>
+</div>
+</div>
+</div>
+
+</body>
+</html>

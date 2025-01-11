@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/leistrap.js"></script>
+    <script src="/js/qrgenerator.js"></script>
+    <script src="/js/qfetching.js"></script>
+    <link rel="stylesheet" href="/css/leistrap.css">
+    <title>Invitation</title>
+
+    <style>
+        h1{
+            font-family: sans-serif;
+            text-align: center;
+            padding: 10px;
+            border-bottom: 1px solid blue;
+            margin-bottom: 1rem;
+        }
+        body{
+            display: flex;
+            min-height: calc(100vh - 20px);
+            min-width: 100vw;
+            justify-content: center;
+            align-items: center;
+        }
+        .container{
+            background-color: #fff;
+            width: 50vw;
+          
+            border-radius: 12px;
+            padding: 20px;
+            box-sizing: var(--leis-bx-sh);
+          
+        }
+        .text{
+            font-size: 18px;
+            padding: 20px;
+        }
+
+        
+        .datePlace{
+            width: 50%;
+            margin: 1.5rem  auto;        }
+        .datePlace ul{
+            list-style: none;
+
+        }
+        .qrInfo{
+            display: flex;
+            width: 100%;
+            justify-content: end;
+        }
+        #qr{
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media screen and (max-width : 800px) {
+            .container{
+                width: 80%;
+                margin: 1rem 0;
+            }
+            .qrInfo{
+                justify-content: center;
+            }
+
+            .qrInfo *{
+                width: 75%;
+            }
+
+            .qrImg{
+                width: 25vw;
+                display: block;
+                
+            }
+            #qr{
+                justify-content: end;
+                align-content: end;
+            }
+
+            .datePlace{
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body class="leis-flex">
+    
+  
+
+    <div class="container leis-flex">
+        <div class="card">
+            <h1> Vous êtes invité !</h1>
+            <div class="text">
+                <p id="gust"></p>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum necessitatibus dolores dolor adipisci, nihil enim cum molestias officia quia, inventore odit tempore a tempora, illo rerum temporibus obcaecati commodi suscipit.
+            </div>
+            <p id="info"></p>
+            <div class="datePlace">
+                <ul>
+                    <li id="place">Lieu : </li>
+                    <li id="date"> Date : </li>
+                </ul>
+            </div>
+
+            <div class="qrInfo">
+                <div id="qr"></div>
+            </div>
+        </div>
+    </div>
+    <p id="msgError"></p>
+   
+
+    <script>
+        leistrap.event.invoke("event:iv",  null, function(res){
+            const [
+                dateEvent, 
+                placeEvent,
+                gust
+            ] = [
+                document.getElementById("date"),
+                document.getElementById("place"),
+                document.getElementById("gust")
+            ]
+
+            dateEvent.innerText += res.data.event.begindate.replaceAll("-", "/").replace("T", " A ")
+            placeEvent.innerText += res.data.event.place
+            gust.innerText = `Madame, Monsieur : ${res.data.gust.name} , ` 
+
+            leistrap.event.handle("key", function(e){
+                e.send(res.data.gust.key)
+            })
+           
+        })
+
+      leistrap.event.invoke("key", function(key){
+        leistrap.event.invoke("generateQR", null, key, function({img, download}){
+                img.setStyleSheet({
+                    className : "qrImg"
+                })
+                document.getElementById("qr").append(img._conf)
+               
+                document.getElementById("qr").append(
+                    leistrap.create("button", {
+                        text : "Télécharger",
+                        type : "button",
+                        className : "leis-btn leis-btn-success",
+                        onclick : function(){download()}
+                    })._conf
+                )
+            })
+      })
+    </script>
+</body>
+</html>

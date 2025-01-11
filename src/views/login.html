@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+      <script src="/js/leistrap.js"></script>
+      <script src="/js/qrgenerator.js"></script>
+      <script src="/js/qfetching.js"></script>
+      <link rel="stylesheet" href="/css/bs.css">
+      <style>
+      body {
+      /* font-family: Arial, sans-serif; */
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+      #forgotPWS{
+        display: block;
+        padding: 8px 10px;
+      }
+      .active{
+        background-color: inherit !important;
+      }
+      </style>
+      <title> lofin</title>
+  </head>
+
+<body>
+  <div class="container cont">
+    <div class="row justify-content-center">
+      <div class="col-lg-4 col-md-5 col-sm-6 col-xs-7 mb-5">
+        <div class="card rounded">
+          <ul class="nav nav-tabs justify-content-center bg-light" style="padding: 20px;">
+            <li class="nav-item">
+              <h3>connexion</h3>
+            </li>
+          </ul>
+
+          <form id="login">
+            <div class="tab-content">
+              <div class="tab-pane container active" >
+                <form >
+                  <label class="text-muted font-weight-bold">E-mail </label>
+                  <input type="email"  name="email" required ="email" placeholder="Courriel de l'hôpital" class="form-control mb-4">
+                  <label class="text-muted font-weight-bold">Mot de passe</label>
+                  <input type="password" name="password" required  placeholder="Mot de passe de l'hôpital" class="form-control mb-4">
+                  <input type="submit" name="" value="Se connecter" class="btn btn-primary btn-block mb-4">
+                </form>
+                <p id="msgError"></p>
+              </div>
+  
+          </form>
+            <div>
+              <a href="login2.html" id="forgotPWS" class="text-center mb-4" title="Cliquez ici">Vous n'avez pas de compte ?</a>
+            </div>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="#" id="redirect" hidden></a>
+  <script>
+
+    
+     document.getElementById("login").addEventListener("submit", function(e){
+      e.preventDefault()
+      const user = {
+          email : e.target.email.value,
+          password : e.target.password.value,
+      } 
+      
+      leistrap.event.invoke('login', null, user, function(result){
+        if(result.data.redirect) leistrap.event.invoke("redirect", null, result.data.redirect)
+
+      })
+      
+      
+     })
+  </script>
+</body>
+</html>

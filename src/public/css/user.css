@@ -1,0 +1,77 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+.profile-icon {
+  font-size: 40px;
+  margin-right: 10px;
+}
+.nav-tabs {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.nav-tabs button {
+  background-color: #f1f1f1;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 10px 15px;
+  margin: 0 5px;
+  transition: background-color 0.3s ease;
+}
+.nav-tabs button.active {
+  background-color: #333;
+  color: #fff;
+}
+.tab-content {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+.tab-content > div {
+  display: none;
+  max-width: 400px;
+  width: 100%;
+  background: #f1f1f2;
+  padding: 20px;
+  border-radius: 8px;
+}
+.tab-content > div.active {
+  display: block;
+}
+.form-group {
+  margin-bottom: 15px;
+}
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.social-share {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.social-share button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
