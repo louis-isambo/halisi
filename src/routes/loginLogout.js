@@ -10,13 +10,6 @@ require('dotenv').config();
 const router = Route()
 router.post("/login/user", function(req, res){
    if(req.body){
-    
-        // if( == process.env.SUE  && req.body.password == process.env.SUP){
-      
-        // }
-        // else{
-        //     res.send( {status : "200", data : "simple user"})
-        // }
         const data = {userEmail : req.body.email, userPassword : req.body.password }
         VerifyState(data, {
             SU : function(){
@@ -48,10 +41,14 @@ router.post("/login/user", function(req, res){
 async function VerifyState(cookies, listeners){
     if(!listeners) listeners = {}
     if(!cookies) cookies = {}
+
     if(cookies.userEmail && cookies.userPassword){
-        
+       
+      
         
         if(cookies["userPassword"] == process.env.SUP && cookies["userEmail"] == process.env.SUE){
+              
+        console.log(process.env.SUP, process.env.SUE);
             if(listeners.SU) listeners.SU()
         }
         
