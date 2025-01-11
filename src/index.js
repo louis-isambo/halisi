@@ -15,7 +15,7 @@ const config = {
     hostname : 'localhost'
 }
 
-server.listen(config.port, config.hostname, function(){
+server.listen(config.port, function(){
     console.log(`server starts at ; http://${config.hostname}:${config.port}`);
     
 })
