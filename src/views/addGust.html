@@ -7,6 +7,7 @@
     <script src="/js/qrgenerator.js"></script>
     <script src="/js/qfetching.js"></script>
     <link rel="stylesheet" href="/css/leistrap.css">
+    <link rel="stylesheet" href="/css/header.css">
     <title>Ajouter un invité</title>
 
     <style>
@@ -38,6 +39,16 @@
             outline: none;
             border-radius: 8px;
         }
+
+        #copyText{
+            
+            background-color: #dddddde1;
+            padding: 5px 10px;
+            border-radius: 6px;
+            float: right;
+            top: -5px;
+            cursor: pointer;
+        }
         @media screen and (max-width : 800px) {
             
             .cardADD{
@@ -49,7 +60,13 @@
 </head>
 <body>
     
-
+    <header>
+        <ul class="leis-flex leis-row">
+            <li> <a href="/login"> Login</a></li>
+            <li> <a href="/services"> Evènement</a></li>
+            <li> <a href="/admins"> Admins</a></li>
+        </ul>
+    </header>
 
     <div class="leis-flex cardADD">
         <h2>Ajouter un invité </h2>
@@ -60,8 +77,10 @@
         </div>
 
        <div hidden id="lp">
-        <label for="link"> Lien</label>
+        <label for="link"> Lien</label>   
+        <span id="copyText">copier</span>
         <input  class="leis-textinput" id="link" placeholder="partager" type="text">
+      
        </div>
        <p id="msgError" hidden></p>
        </div>
@@ -71,7 +90,27 @@
     </div>
 
     <script>
-        
+        let cp =  document.getElementById("copyText")
+        let linkCp =  document.getElementById("link")
+
+        document.getElementById("name").addEventListener("focus", function(){
+            cp.textContent = "Copier";
+        })
+        linkCp.addEventListener("focus", function(){
+            cp.textContent = "Copier";
+            
+        })
+        cp.addEventListener("click", function(){
+            navigator.clipboard.writeText(linkCp.value).then(() => {
+               cp.textContent = "Lien copié avec succès !";
+         
+            }).catch(err => {
+
+            cp.textContent = "Impossible de copier le texte.";
+        });
+           
+        })
+
         const url = location.pathname.split("/")
         
         document.getElementById("c").addEventListener("click", function(){
@@ -86,11 +125,15 @@
             leistrap.event.invoke("event:addgust", null, {key: url[url.length - 1], name : GustName }, function(res){
                         document.getElementById("lp").removeAttribute("hidden")
                         linkShare.value = path+"/iv/"+res.data.key
+                        document.getElementById("name").value = ""
 
                 })
            
         })
 
     </script>
+
+
+   
 </body>
 </html>

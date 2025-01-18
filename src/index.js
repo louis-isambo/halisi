@@ -35,7 +35,7 @@ app.use(router)
 app.use(loginLogout)
 
 app.get("/", function(req, res){
-    res.sendFile(path.join(__dirname, "views/home.html"))
+    res.redirect("/services")
 })
 
 app.get("/login", function(req, res){
@@ -48,7 +48,7 @@ app.get("/signup", function(req, res){
 
 
 app.get("/scan", function(req, res){
-    res.sendFile(path.join(__dirname, "views/qr.html"))
+    res.sendFile(path.join(__dirname, "views/scan.html"))
 })
 
 app.get("/services", function(req, res){

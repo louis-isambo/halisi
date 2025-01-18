@@ -25,14 +25,18 @@
             align-items: center;
         }
         .container{
-            background-color: #fff;
-            width: 50vw;
-          
-            border-radius: 12px;
+            max-width: 600px;
+            margin: 20px auto;
             padding: 20px;
-            box-sizing: var(--leis-bx-sh);
-          
+            background: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
         }
+        .invitation-image {
+            width: 100%;
+            border-radius: 8px;
+        }
+
         .text{
             font-size: 18px;
             padding: 20px;
@@ -54,6 +58,9 @@
         #qr{
             display: flex;
             flex-direction: column;
+        }
+        .download{
+            text-align: center;
         }
 
         @media screen and (max-width : 800px) {
@@ -91,10 +98,12 @@
 
     <div class="container leis-flex">
         <div class="card">
+            <img src="/img/iv1.jpg" alt="Invitation" class="invitation-image">
             <h1> Vous êtes invité !</h1>
             <div class="text">
                 <p id="gust"></p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum necessitatibus dolores dolor adipisci, nihil enim cum molestias officia quia, inventore odit tempore a tempora, illo rerum temporibus obcaecati commodi suscipit.
+                Vous êtes cordialement invité au mariage de Nom de la mariée et Nom du marié. Nous sommes ravis de partager ce moment spécial avec vous et nous vous remercions pour votre présence <br>
+    
             </div>
             <p id="info"></p>
             <div class="datePlace">
@@ -103,6 +112,8 @@
                     <li id="date"> Date : </li>
                 </ul>
             </div>
+
+           <p class="download"> Veuillez télécharger l'invitation</p>
 
             <div class="qrInfo">
                 <div id="qr"></div>
