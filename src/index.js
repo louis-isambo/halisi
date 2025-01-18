@@ -12,10 +12,10 @@ const cookieParser = require('cookie-parser');
 
 const config = {
     port : '4040',
-
+    hostname : 'localhost'
 }
 
-server.listen(config.port, function(){
+server.listen(config.port, config.hostname, function(){
     console.log(`server starts at ; http://${config.hostname}:${config.port}`);
     
 })
@@ -126,4 +126,10 @@ app.get("/clearData", function(req, res){
     }
     
     res.redirect("/login")
+})
+
+
+server.listen(4040, function(){
+    console.log(`server started`);
+    
 })
